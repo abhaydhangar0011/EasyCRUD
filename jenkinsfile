@@ -7,29 +7,24 @@ pipeline {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/abhaydhangar0011/EasyCRUD.git'
-                echo 'Code Pulled Successfully'
+            }
+        }
+
+        stage('Install Maven') {
+            steps {
+                sh '''
+                sudo apt update
+                sudo apt install -y maven
+                mvn -version
+                '''
             }
         }
 
         stage('Build') {
             steps {
-            sh '''cd backend
-                  sudo apt install maven -y
-                  sudo mvn clean package -DskipTests'''
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running Tests'
-                echo 'Tests Passed'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying Application'
-                echo 'Deployment Successful'
+                dir('backend') {
+                    sh 'mvn clean package -DskipTests'
+                }
             }
         }
     }
