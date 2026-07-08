@@ -13,8 +13,9 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Build Started'
-                echo 'Build Completed'
+            sh '''cd backend
+                  apt install maven -y
+                  mvn clean package -DskipTests'''
             }
         }
 
