@@ -10,16 +10,6 @@ pipeline {
             }
         }
 
-        stage('Install Maven') {
-            steps {
-                sh '''
-                sudo apt update
-                sudo apt install -y maven
-                mvn -version
-                '''
-            }
-        }
-
         stage('Build') {
             steps {
                 dir('backend') {
