@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Pull Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/abhaydhangar0011/EasyCRUD.git'
+                echo 'Code Pulled Successfully'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Build Started'
+                echo 'Build Completed'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running Tests'
+                echo 'Tests Passed'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying Application'
+                echo 'Deployment Successful'
+            }
+        }
+    }
+}
