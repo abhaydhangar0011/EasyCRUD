@@ -20,7 +20,7 @@ pipeline {
         }
            stage('sonarqube') {
             steps {
-                    withSonarQubeEnv( installationName: 'sonarqube', credentialsId: 'sonaridnew') {
+                    withSonarQubeEnv( installationName: 'sonarqube', credentialsId: 'sonarid') {
                       sh '''cd backend
                       mvn sonar:sonar
                        -Dsonar.projectKey=studentdb'''
