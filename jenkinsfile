@@ -12,25 +12,28 @@ pipeline {
 
         stage('Build') {
             steps {
-                 sh '''cd backend
-                 mvn clean package -DskipTests'''
-                    
-                
+                sh '''
+                cd backend
+                mvn clean package -DskipTests
+                '''
             }
         }
-           stage('sonarqube') {
+
+        stage('sonarqube') {
             steps {
-              withSonarQubeEnv( installationName: 'sonarqube', credentialsId: 'sonarid')
-                      sh '''cd backend
-                      mvn sonar:sonar
-                       -Dsonar.projectKey=studentdb'''
-                   }
+                withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonarid') {
+                    sh '''
+                    cd backend
+                    mvn sonar:sonar -Dsonar.projectKey=studentdb
+                    '''
                 }
-            
-     
-stage('deploy') {
-            steps {
-                 echo 'deploy successful'
             }
         }
+
+        stage('deploy') {
+            steps {
+                echo 'deploy successful'
+            }
+        }
+    }
 }
