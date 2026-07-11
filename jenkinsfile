@@ -18,5 +18,21 @@ pipeline {
                 
             }
         }
-    }
+           stage('sonarqube') {
+            steps {
+                    withSonarQubeEnv( installationName: 'sonarqube' credentialsId: 'sonaridnew', installationName: 'abhay sonar') {
+                      sh '''cd backend
+                      mvn sonar:sonar
+                       -Dsonar.projectKey=studentdb'''
+                   }
+                }
+            }
+     
+stage('deploy') {
+            steps {
+                 echo 'deploy successful'
+            }
+        }
+}
+
 }
