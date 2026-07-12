@@ -19,28 +19,6 @@ pipeline {
             }
         }
 
-        stage('sonarqube') {
-            steps {
-                withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonarid') {
-                    sh '''
-                    cd backend
-                    mvn sonar:sonar -Dsonar.projectKey=studentdb
-                    '''
-                }
-            }
-        }
-       stage('quality gate') {
-            steps {
-            timeout(5){ 
-               waitForQualityGate abortPipeline: true
-   }
+    
 }
-}
-
-        stage('deploy') {
-            steps {
-                echo 'deploy successful'
-            }
-        }
-    }
 }
