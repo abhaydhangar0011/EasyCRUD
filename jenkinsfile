@@ -37,9 +37,10 @@ stage('sonarqube') {
    }
 }
 }
-stage('deploy') {
-            steps {
-                echo 'deploy successful'
+stage('deliver') {
+            steps {sh '''cd backend/target/
+aws s3 cp student-registration-backend-0.0.1-SNAPSHOT.jar s3://deliver-bucket-jenkins/artifacts/student.jar'''
+                
             }
         }
 
